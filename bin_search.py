@@ -1,22 +1,22 @@
-# initial version for program, which:
+# initial version for Binary Search program, which:
 # generates sorted list of lenght n
-# deletes random element element of the list
-# finds that element usoing binary search
+# deletes random element from the list
+# finds deleted element using Binary Search
 
 import random
 
 len_list = 120
 
-# initiate table of ints
+# initiate list of sorted elements with lenght n
 list_of_nrs = [x for x in range(1, len_list+1)]
 print(f"Initial len: {len(list_of_nrs)}")
 
-# delete randon element
+# delete randon element from the list
 random_nr = random.randint(0, len_list-1)
 del list_of_nrs[random_nr]
 print(f"Deleted element: '{random_nr+1}', updated len: {len(list_of_nrs)}\n")
 
-
+#initiated Binary search
 left = 0
 right = len(list_of_nrs)
 
