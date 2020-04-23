@@ -4,9 +4,11 @@
 # finds deleted element using Binary Search
 
 import random
+from datetime import datetime
 
-len_list = 120
+len_list = 100_000_000
 
+start_time = datetime.now()
 # initiate list of sorted elements with lenght n
 list_of_nrs = [x for x in range(1, len_list+1)]
 print(f"Initial len: {len(list_of_nrs)}")
@@ -14,7 +16,7 @@ print(f"Initial len: {len(list_of_nrs)}")
 # delete randon element from the list
 random_nr = random.randint(0, len_list-1)
 del list_of_nrs[random_nr]
-print(f"Deleted element: '{random_nr+1}', updated len: {len(list_of_nrs)}\n")
+print(f"Deleted element: {random_nr+1}, updated len: {len(list_of_nrs)}\n")
 
 #initiated Binary search
 left = 0
@@ -45,3 +47,5 @@ while left <= right:
     if list_of_nrs[middle] == middle+1:
         # print('==',list_of_nrs[middle],middle+1)
         left = middle
+
+print(f'time passed {datetime.now()-start_time}')
