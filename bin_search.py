@@ -1,12 +1,12 @@
-# initial version for Binary Search program, which:
+# Binary Search program:
 # generates sorted list of lenght n
 # deletes random element from the list
 # finds deleted element using Binary Search
-
+# should change the setup to functions + handle edge cases
 import random
 from datetime import datetime
 
-len_list = 100_000_000
+len_list = 10_000_000
 
 start_time = datetime.now()
 # initiate list of sorted elements with lenght n
@@ -18,21 +18,20 @@ random_nr = random.randint(0, len_list-1)
 del list_of_nrs[random_nr]
 print(f"Deleted element: {random_nr+1}, updated len: {len(list_of_nrs)}\n")
 
-#initiated Binary search
+# initiated Binary search
+counter = 0
+
 left = 0
 right = len(list_of_nrs)
-
-counter = 0
 while left <= right:
     counter += 1
     middle = (left+right)//2
-    print(f"Run nr: {counter}, left/middle/right: {left} / {middle} / {right}")
+    print(f"Run nr: {counter}, left/middle/right: {left}/ {middle} / {right}")
 
-    #should update work with edge cases
+    # should update work with edge cases
     if len(list_of_nrs[left:right+1]) <= 3:
         final_nrs = list_of_nrs[left:right+1]
         for pos, nr in enumerate(final_nrs):
-            # print(pos, nr+1==final_nrs[pos+1])
             if nr+1 == final_nrs[pos+1]:
                 continue
             else:
