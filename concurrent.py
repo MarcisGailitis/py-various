@@ -6,13 +6,13 @@ from concurrent import futures
 
 
 def my_sleep():
-    l=2
-    time.sleep(l)
-    tm=datetime.now().time()
-    print(f'waited {l} seconds. Timestamp: {tm.hour}:{tm.minute}:{tm.second}')
+    sec = 2
+    time.sleep(sec)
+    time_now = datetime.now().time()
+    print(f'waited {sec} seconds. Timestamp: {time_now.hour}:{time_now.minute}:{time_now.second}')
 
-    
-#regular process
+
+# regular process
 def regular(n):
     start_time=datetime.now()
     for n in range(1,n+1):
