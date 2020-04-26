@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # Binary Search:
 # generates sorted list of lenght n
 # deletes random element from the list
@@ -47,7 +48,7 @@ def binary(list_of_nrs):
 
 
 def main():
-    len_list = 10_000_000
+    len_list = 100_000_000
     list_of_nrs = [x for x in range(1, len_list+1)]
     print(f"Initial len: {len(list_of_nrs)}")
     delete_element(list_of_nrs, len_list)
