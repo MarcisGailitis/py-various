@@ -6,6 +6,7 @@ from datetime import datetime
 from concurrent import futures
 
 
+# define "time consuming" process
 def my_sleep():
     how_long = 2
     time.sleep(how_long)
@@ -14,32 +15,42 @@ def my_sleep():
           f'Timestamp: {time_now.hour}:{time_now.minute}:{time_now.second}')
 
 
+# define decorector, to centralize logging
+def timer(func):
+    def wrapper(n):
+        start_time = datetime.now()
+        func(n)
+        print(f'Done in {datetime.now()-start_time}')
+        print()  # add extra blank line
+    return wrapper
+
+
 # regular flow
+@timer
 def regular(n):
-    start_time = datetime.now()
+    print(f'Using serial flow:')
     for n in range(1, n+1):
         my_sleep()
-    print(f'Done in {datetime.now()-start_time}')
 
 
+# parallel threads
+@timer
 def threadpool(n):
-    start_time = datetime.now()
     excecutor = futures.ThreadPoolExecutor()
     for n in range(1, n+1):
         excecutor.submit(my_sleep)
-    print(f'\nUsing threading method:')
+    print(f'Using paraller threading:')
     excecutor.shutdown()
-    print(f'Done in {datetime.now()-start_time}')
 
 
+# parallel processes
+@timer
 def processpool(n):
-    start_time = datetime.now()
     excecutor = futures.ProcessPoolExecutor()
     for n in range(1, n+1):
         excecutor.submit(my_sleep)
-    print(f'\nUsing process method:')
+    print(f'Using paraller processes:')
     excecutor.shutdown()
-    print(f'Done in {datetime.now()-start_time}')
 
 
 def main():
