@@ -22,7 +22,9 @@ def get_url(woeid):
     print('Retrieving', url)
     response = requests.get(url, auth=auth, params=places)
     headers = dict(response.headers)
-    print('Remaining', headers['x-rate-limit-remaining'],'from',headers['x-rate-limit-limit'])
+    print(f"Remaining: {headers['x-rate-limit-remaining']} "
+          f"from {headers['x-rate-limit-limit']}"
+          )
     return response
 
 
