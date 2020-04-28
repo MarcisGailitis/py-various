@@ -5,24 +5,23 @@ from datetime import date
 from dotenv import load_dotenv
 
 
-def get_url():
+def get_url(id):
+    url = 'https://api.twitter.com/1.1/trends/place.json'
+
     load_dotenv()
     consumer_key = os.getenv('TW_consumer_key')
     consumer_secret = os.getenv('TW_consumer_secret')
     token_key = os.getenv('TW_token_key')
     token_secret = os.getenv('TW_token_secret')
-
     auth = OAuth1(consumer_key, consumer_secret, token_key, token_secret)
-    url = 'https://api.twitter.com/1.1/trends/place.json'
-    
-    #854823 for Riga, 23424874 forLatvia
-    woeid = {'854823':'riga','23424874':'latvia'}
-    places = {'id':'854823'}
+
+    places = {'id':id}
+
     print('Retrieving', url)
-    r = requests.get(url, auth=auth, params=places)
-    headers = dict(r.headers)
-    # print headers
+    response = requests.get(url, auth=auth, params=places)
+    headers = dict(response.headers)
     print('Remaining', headers['x-rate-limit-remaining'],'from',headers['x-rate-limit-limit'])
+    return response
 
 
 def chek_for_dir(this_month_dir):
@@ -47,7 +46,9 @@ def save_file(response):
 
 def main():
     # get_url()
-    response = 'asd'
-    save_file(response)
+    woeid = {'854823':'riga','23424874':'latvia'}
+    for id in woeid:
+        save_file(get_url(id))
+
 
 main()
